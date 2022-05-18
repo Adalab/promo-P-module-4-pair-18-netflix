@@ -13,10 +13,19 @@ const serverPort = 4000;
 server.listen(serverPort, () => {
   console.log(`Server listening at http://localhost:${serverPort}`);
 });
-//endpoint
+
+//endpoints
+server.get('/movie/:movieId', (req, res) => {
+  console.log(req.params)
+ });
+
+
 server.get('/movies', (req, res) => {
   //Guarda el valor del query param de género en una constante
   const genderFilterParam = req.query.gender;
+  const staticServerPathWeb = '../web/public'; // En esta carpeta ponemos los ficheros estáticos para que se guarden
+  const staticServerPathImages = './src/public-movies-images/'
+app.use(express.static(staticServerPathWeb));
   //respuesta de listado pintado  **
   res.json({
     success: true,
@@ -25,3 +34,5 @@ server.get('/movies', (req, res) => {
     ),
   });
 });
+
+
