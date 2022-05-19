@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 //Importamos con require el JSON
-const movies = require('./data/movies.json');
+const moviesData = require('./data/movies.json');
 
 // create and config server
 const server = express();
@@ -31,12 +31,6 @@ server.get('/movies', (req, res) => {
   //Guarda el valor del query param de género en una constante
   const genderFilterParam = req.query.gender;
 
-  const staticServerPathWeb = '../web/public-react'; // En esta carpeta ponemos los ficheros estáticos para que se guarden
-  const staticServerPathImages = './src/public-movies-images/';
-  server.use(express.static(staticServerPathImages));
-  const staticServerStyle = './src/public-styles';
-  server.use(express.static(staticServerStyle));
-
   //respuesta de listado pintado  **
   res.json({
     success: true,
@@ -45,3 +39,10 @@ server.get('/movies', (req, res) => {
     ),
   });
 });
+
+const staticServerPathWeb = '../web/public-react'; // En esta carpeta ponemos los ficheros estáticos para que se guarden
+server.use(express.static(staticServerPathWeb));
+const staticServerPathImages = './src/public-movies-images/';
+server.use(express.static(staticServerPathImages));
+const staticServerStyle = './src/public-styles';
+server.use(express.static(staticServerStyle));
